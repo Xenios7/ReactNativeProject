@@ -1,43 +1,40 @@
-import { View, Text, Image, ImageBackground, ScrollView, Button, Pressable } from 'react-native'
-const logoImg = require("./assets/adaptive-icon.png");
+import React, { useState } from 'react';
+import { Pressable, Text, StyleSheet, View } from 'react-native';
 
-export default function App(){
-  return(
+// Define the component with React.FC type
+const App: React.FC = () => {
+  // Define state with explicit type annotation
+  const [message, setMessage] = useState<string>('Press Me!');
 
-   <View style = {{ flex: 1, backgroundColor: "plum", padding: 60}}>
-    <ScrollView>
-     
-      <Pressable onPress = {() => console.log("Image pressed")}>
-        <Image source = {logoImg} style = {{ width: 300, height: 300}} />
+  return (
+    <View style={styles.container}>
+      {/* Pressable with onPressOut */}
+      <Pressable
+        style={styles.button}
+        onPressOut={() => setMessage('Released!')} // Fired when the press is released
+      >
+        <Text style={styles.text}>{message}</Text>
       </Pressable>
-
-      <Pressable>
-        <Text>
-          The sun dipped below the horizon, casting a warm orange glow across the sky.  
-
-          Birds chirped softly as the evening breeze rustled through the trees.  
-
-          A gentle stream flowed nearby, reflecting the fading light like scattered jewels.  
-
-          In the distance, laughter echoed from a group of children playing near the meadow.  
-
-          The world seemed at peace, wrapped in the quiet embrace of twilight.  
-        </Text>
-      </Pressable>
-
-
-      <Image source = {logoImg} style = {{ width: 300, height: 300}} />
-
-      <Button 
-        title = "Press" onPress = {( () => console.log("Button Pressed"))}
-        color = "lightyellow"
-        disabled
-      />
-
-    </ScrollView>
-     
-
-  </View>
-
+    </View>
   );
-}
+};
+
+// Styles
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  button: {
+    padding: 10,
+    backgroundColor: 'blue',
+    borderRadius: 5,
+  },
+  text: {
+    color: 'white',
+    fontSize: 18,
+  },
+});
+
+export default App;
